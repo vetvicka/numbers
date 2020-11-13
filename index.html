@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Numbers</title>
+</head>
+<body>
+    <div id="root"></div>
+    <div class="line">
+        <span class="label">input</span>
+        <input id="input" type="number" placeholder="72" min="0">
+    </div> 
+    <div class="line">
+        <span class="label">basic</span>
+        <input id="no-carry" readonly></input>
+    </div> 
+    <div class="line">
+        <span class="label">carry</span>
+        <input id="carry" readonly></input>
+    </div> 
+    <div id="copyNotification"></div>
+    <script type="module" src="./index.js"></script>
+</body>
+</html>
