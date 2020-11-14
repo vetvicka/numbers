@@ -10,7 +10,7 @@
     <div id="root"></div>
     <div class="line">
         <span class="label">input</span>
-        <input id="input" type="number" placeholder="72" min="0">
+        <input id="input" type="number" value="42" placeholder="42" min="0">
     </div> 
     <div class="line">
         <span class="label">basic</span>
@@ -20,7 +20,18 @@
         <span class="label">carry</span>
         <input id="carry" readonly></input>
     </div> 
+    <button id="refresh">Davej dalsi</button>
     <div id="copyNotification"></div>
+    <div id="settings">
+        <select name="operator" id="operator">
+            <option value="plus" selected>+</option>
+            <option value="minus">-</option>
+        </select>
+        <div class="line">
+            <span class="label">domain</span>
+            <input id="domain" type="number" value="100" min="0">
+        </div> 
+    </div>
     <script type="module" src="./index.js"></script>
 </body>
 </html>

@@ -24,3 +24,14 @@
 input {
     width: 80px;
 }
+
+#settings {
+    margin-top: 100px;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: black;
+        color: white; 
+    }
+}

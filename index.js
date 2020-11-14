@@ -1,25 +1,39 @@
-import { additions, isCarry } from './utils.js';
+import { additions, subtractions, isCarry } from './utils.js';
  
 const input = document.querySelector('#input');
 const noCarry = document.querySelector('#no-carry');
 const carry = document.querySelector('#carry');
 const copyNotification = document.querySelector('#copyNotification');
+const operator = document.querySelector('#operator');
+const refresh = document.querySelector('#refresh');
+const domain = document.querySelector('#domain');
 
-input.addEventListener('input', (e) => {
-    const value = parseInt(e.target.value);
-    const pairs = additions(value);
-    const noCarryPairs = pairs.filter(([a, b]) => !isCarry(a, b));
-    const randomNoCarryPair = noCarryPairs[Math.floor( Math.random() * noCarryPairs.length )];
-    const [a, b] = randomNoCarryPair;
-    noCarry.value = `${a} + ${b}`;
-    const carryPairs = pairs.filter(([a, b]) => isCarry(a, b));
+function recalculate() {
+    const sign = operator.value === 'plus' ? '+' : '-';
+    const method = operator.value === 'plus' ? additions : subtractions;
+    const value = parseInt(input.value);
+    const domainValue = parseInt(domain.value);
+    const pairs = method(value, domainValue);
+    const noCarryPairs = pairs.filter(([a, b]) => !isCarry(a, b, operator.value));
+    if (noCarryPairs.length) {
+        const randomNoCarryPair = noCarryPairs[Math.floor( Math.random() * noCarryPairs.length )];
+        const [a, b] = randomNoCarryPair;
+        noCarry.value = `${a} ${sign} ${b}`;
+    } else {
+        noCarry.value = "not possible";
+    }
+    const carryPairs = pairs.filter(([a, b]) => isCarry(a, b, operator.value));
     if (carryPairs.length === 0) {
         carry.value = "not possible";
         return;
     }
     const randomCarryPair = carryPairs[Math.floor( Math.random() * carryPairs.length )];
     const [c, d] = randomCarryPair;
-    carry.value = `${c} + ${d}`;
+    carry.value = `${c} ${sign} ${d}`;
+}
+
+input.addEventListener('input', (e) => {
+    recalculate();
 });
 
 function copy(text) {
@@ -42,4 +56,16 @@ noCarry.addEventListener('click', () => {
     copy(noCarry.value);
 });
 
-console.log(additions(10))
+refresh.addEventListener('click', () => {
+    recalculate();
+});
+
+operator.addEventListener('change', (e) => {
+    recalculate();
+});
+
+domain.addEventListener('change', (e) => {
+    recalculate();
+});
+
+recalculate();

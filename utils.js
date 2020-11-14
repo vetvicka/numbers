@@ -7,6 +7,14 @@ export function additions(input) {
   return pairs;
 }
 
+export function subtractions(input, domain = 100) {
+  const pairs = [];
+  for(let i = input; i <= domain; i++) {
+    pairs.push([i, i - input]);
+  }
+  return pairs;
+}
+
 function digits(number) {
   const arr = [];
   let i = number;
@@ -17,13 +25,16 @@ function digits(number) {
   return arr;
 }
 
-export function isCarry(a, b) {
+export function isCarry(a, b, op) {
   const aDigits = digits(a);
   const bDigits = digits(b);
   const end = Math.min(aDigits.length, bDigits.length);
 
   for (let i = 0; i < end; i++) {
-    if(aDigits[i] + bDigits[i] > 9) {
+    if(op === 'minus' && aDigits[i] - bDigits[i] < 0) {
+      return true;
+    }
+    if(op === 'plus' && aDigits[i] + bDigits[i] > 9) {
       return true;
     }
   }

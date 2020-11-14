@@ -1,5 +1,9 @@
 if(require('electron-squirrel-startup')) return;
 
+try {
+  require('electron-reloader')(module);
+} catch (_) {}
+
 const { app, BrowserWindow } = require('electron')
 
 function createWindow () {
