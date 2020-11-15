@@ -1,12 +1,12 @@
-import { additions, subtractions, isCarry } from './utils.js';
+import { additions, subtractions, isCarry, Operator } from './utils.js';
  
-const input = document.querySelector('#input');
-const noCarry = document.querySelector('#no-carry');
-const carry = document.querySelector('#carry');
-const copyNotification = document.querySelector('#copyNotification');
-const operator = document.querySelector('#operator');
-const refresh = document.querySelector('#refresh');
-const domain = document.querySelector('#domain');
+const input = document.querySelector('#input')! as HTMLInputElement;
+const noCarry = document.querySelector('#no-carry')! as HTMLInputElement;
+const carry = document.querySelector('#carry')! as HTMLInputElement;
+const copyNotification = document.querySelector('#copyNotification')! as HTMLElement;
+const operator = document.querySelector('#operator')! as HTMLSelectElement;
+const refresh = document.querySelector('#refresh')!;
+const domain = document.querySelector('#domain')! as HTMLInputElement;
 
 function recalculate() {
     const sign = operator.value === 'plus' ? '+' : '-';
@@ -14,7 +14,7 @@ function recalculate() {
     const value = parseInt(input.value);
     const domainValue = parseInt(domain.value);
     const pairs = method(value, domainValue);
-    const noCarryPairs = pairs.filter(([a, b]) => !isCarry(a, b, operator.value));
+    const noCarryPairs = pairs.filter(([a, b]) => !isCarry(a, b, operator.value as Operator));
     if (noCarryPairs.length) {
         const randomNoCarryPair = noCarryPairs[Math.floor( Math.random() * noCarryPairs.length )];
         const [a, b] = randomNoCarryPair;
@@ -22,7 +22,7 @@ function recalculate() {
     } else {
         noCarry.value = "not possible";
     }
-    const carryPairs = pairs.filter(([a, b]) => isCarry(a, b, operator.value));
+    const carryPairs = pairs.filter(([a, b]) => isCarry(a, b, operator.value as Operator));
     if (carryPairs.length === 0) {
         carry.value = "not possible";
         return;
@@ -36,7 +36,7 @@ input.addEventListener('input', (e) => {
     recalculate();
 });
 
-function copy(text) {
+function copy(text: string) {
     navigator.clipboard.writeText(text)
     .then(() => {
         copyNotification.innerHTML = `"${text}" copied`

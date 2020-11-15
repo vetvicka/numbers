@@ -1,4 +1,4 @@
-if(require('electron-squirrel-startup')) return;
+if(require('electron-squirrel-startup')) return app.quit();
 
 try {
   require('electron-reloader')(module);

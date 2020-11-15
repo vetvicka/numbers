@@ -1,13 +1,12 @@
-export function additions(input) {
+export function additions(input: number) {
   const pairs = [];
-  // const end = Math.ceil(input / 2);
   for(let i = 0; i <= input; i++) {
     pairs.push([i, input - i]);
   }
   return pairs;
 }
 
-export function subtractions(input, domain = 100) {
+export function subtractions(input: number, domain = 100) {
   const pairs = [];
   for(let i = input; i <= domain; i++) {
     pairs.push([i, i - input]);
@@ -15,7 +14,7 @@ export function subtractions(input, domain = 100) {
   return pairs;
 }
 
-function digits(number) {
+export function reverseDigits(number: number) {
   const arr = [];
   let i = number;
   while(i / 10 > 0) {
@@ -25,9 +24,11 @@ function digits(number) {
   return arr;
 }
 
-export function isCarry(a, b, op) {
-  const aDigits = digits(a);
-  const bDigits = digits(b);
+export type Operator = 'plus' | 'minus'; 
+
+export function isCarry(a: number, b: number, op: Operator) {
+  const aDigits = reverseDigits(a);
+  const bDigits = reverseDigits(b);
   const end = Math.min(aDigits.length, bDigits.length);
 
   for (let i = 0; i < end; i++) {
