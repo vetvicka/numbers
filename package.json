@@ -7,7 +7,9 @@
     "start": "tsc-watch --onFirstSuccess \"electron-forge start\"",
     "test": "tsc -p tsconfig-spec.json && mocha ./spec/**/*.spec.js",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "make-win": "electron-forge make --platform win32",
+    "win-cp": "cp -r out/make/squirrel.windows/ /mnt/c/wsl_backup/out"
   },
   "repository": {
     "type": "git",
@@ -33,7 +35,8 @@
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "tsc-watch": "^4.2.9",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "update-electron-app": "^2.0.1"
   },
   "config": {
     "forge": {

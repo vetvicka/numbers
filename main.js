@@ -1,10 +1,17 @@
-if(require('electron-squirrel-startup')) return app.quit();
+require('update-electron-app')({
+  repo: 'vetvicka/numbers',
+  updateInterval: '1 hour',
+});
+
+if(require('electron-squirrel-startup')) return;
 
 try {
   require('electron-reloader')(module);
 } catch (_) {}
 
+
 const { app, BrowserWindow } = require('electron')
+
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -19,7 +26,7 @@ function createWindow () {
   win.loadFile('index.html');
   win.removeMenu();
 //   win.setAlwaysOnTop(true);
-//   win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow)
